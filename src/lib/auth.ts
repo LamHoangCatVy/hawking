@@ -14,9 +14,10 @@ export const authOptions: NextAuthOptions = {
             })
             if(db_user){
                 token.id = db_user.id
-                token.credits = db_user.credit
+                token.credits = db_user.credits
             }
+            return token;
         }
-    }
+    },
     providers: []
 }
