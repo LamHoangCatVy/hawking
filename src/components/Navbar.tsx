@@ -17,8 +17,8 @@ const Navbar = async (props: Props) => {
         </Link>
         {/* <ThemeToggle /> */}
         <div className="flex items-center">
-          <Link href="/gallery" className="mr-3">
-            Gallery
+          <Link href="/library" className="mr-3">
+            Library
           </Link>
           <Link href="/create-course" className="mr-3">
             Create Course
