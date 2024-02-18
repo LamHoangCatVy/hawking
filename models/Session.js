@@ -3,6 +3,12 @@ import mongoose  from "mongoose";
 const Schema = mongoose.Schema;
 
 const SessionSchema = new Schema({
+    _id: {
+        type: String,
+        required: true,
+        unique: true,
+        default: () => createId(),
+    },
     sessionToken:{
         type: String,
         unique: true
@@ -15,10 +21,12 @@ const SessionSchema = new Schema({
         type: Date,
     },
     user: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User",
-        
     }
+
 })
 
 const Session = mongoose.model("Session", SessionSchema);
+
+export default Session;
