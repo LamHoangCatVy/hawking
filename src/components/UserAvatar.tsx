@@ -1,12 +1,24 @@
 import React from "react";
 import { Avatar } from "./ui/avatar";
-import Image from 'next/image'
-type Props = {};
+import Image from "next/image";
+import { User } from "next-auth";
+import { AvatarFallback } from "@radix-ui/react-avatar";
+type Props = {
+  user: User;
+};
 
-const UserAvatar = (props: Props) => {
+const UserAvatar = ({ user }: Props) => {
   return (
     <Avatar>
-      <Image fill src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png" alt="user avatar" />
+      {user.image ? (
+        <div className="relative w-full h-full aspect-square">
+          <Image fill src={user.image} alt="user avatar" referrerPolicy="no-referrer" />
+        </div>
+      ) : (
+        <AvatarFallback>
+          <span className="sr-only">{user?.name}</span>
+        </AvatarFallback>
+      )}
     </Avatar>
   );
 };
