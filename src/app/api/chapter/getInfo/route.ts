@@ -37,19 +37,19 @@ export async function POST(req: Request, res: Response) {
     let maxLength = 50;
     transcript = transcript.split(" ").slice(0, maxLength).join(" ");
 
-    const { summary }: { summary: string } = await strict_output(
+    /*const { summary }: { summary: string } = await strict_output(
       'You are an AI capable of summarising a youtube transcript related  in limit 50 words',
       "summarise in 50 words or less and do not talk of the sponsors or anything unrelated to the main topic, also do not introduce what the summary is about.\n" +
         transcript,
       { summary: "summary of the transcript in 150 word" }
-    );
+    );*/
 
-    const questions = await getQuestionsFromTranscript(
+    /*const questions = await getQuestionsFromTranscript(
       transcript,
       chapter.name
-    );
+    );*/
 
-    await prisma.question.createMany({
+    /*await prisma.question.createMany({
       data: questions.map((question) => {
         let options = [
           question.answer,
@@ -65,13 +65,13 @@ export async function POST(req: Request, res: Response) {
           chapterId: chapterId,
         };
       }),
-    });
+    });*/
 
     await prisma.chapter.update({
       where: { id: chapterId },
       data: {
         videoId: videoId,
-        summary: summary,
+        //summary: summary,
       },
     });
 
@@ -90,6 +90,7 @@ export async function POST(req: Request, res: Response) {
         {
           success: false,
           error: "unknown",
+          type_error:error
         },
         { status: 500 }
       );
