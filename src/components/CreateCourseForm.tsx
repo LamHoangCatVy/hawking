@@ -14,13 +14,11 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
-// import SubscriptionAction from "./SubscriptionAction";
 
-type Props = { isPro: boolean };
 
 type Input = z.infer<typeof createChaptersSchema>;
 
-const CreateCourseForm = ({ isPro }: Props) => {
+const CreateCourseForm = () => {
   const router = useRouter();
   const { toast } = useToast();
   const { mutate: createChapters, isPending } = useMutation({
@@ -45,15 +43,15 @@ const CreateCourseForm = ({ isPro }: Props) => {
       toast({
         title: "Error",
         description: "Please fill all the units",
-        variant: "destructive",
+        variant: "destructive"
       });
-      return;
     }
     createChapters(data, {
       onSuccess: ({ course_id }) => {
         toast({
           title: "Success",
           description: "Course created successfully",
+          
         });
         router.push(`/create-course/${course_id}`);
       },
@@ -62,7 +60,7 @@ const CreateCourseForm = ({ isPro }: Props) => {
         toast({
           title: "Error",
           description: "Something went wrong",
-          variant: "destructive",
+          variant: "destructive"
         });
       },
     });
