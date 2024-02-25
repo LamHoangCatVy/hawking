@@ -32,10 +32,10 @@ export async function POST(req: Request, res: Response) {
 
     let output_units: outputUnits = await strict_output(
       "You are an AI capable of generating course content, coming up with relevant chapter titles, and finding relevant youtube videos for each chapter",
-      new Array(units.length).fill(`It is your job to create a course about ${title}. The user has a request to create a chapter for each unit and the chapters related to the units the user requests and cannot rename the units limit 10 words. Then, for each chapter, provide a detailed youtube search query that can be used to find an informative educationalvideo for each chapter. Limit 10 word`),
+      new Array(units.length).fill(`It is your job to create a course about ${title}. The user has a request to create at least one and only chapter for at least one and only unit and the chapter related to the unit cannot exceed 5 words. Then, for each chapter, provide a search query that is limited in 5 words and can be used to find an informative educational video.`),
       {
         title: "title of the unit",
-        chapters: "an array of chapters, each chapter must have the key youtube_search_query and chapter_title in the JSON object and have only 3 chapters, each chapter is only about 10 words and optimize it for low token usage",
+        chapters: "an array of chapters, each chapter must have the key youtube_search_query and chapter_title in the JSON object and have only 1 chapters, each chapter is only about 10 words and optimize it for low token usage",
       }
     );
 
